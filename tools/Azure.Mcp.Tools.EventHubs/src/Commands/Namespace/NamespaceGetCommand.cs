@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Net;
 using Azure.Mcp.Core.Commands;
 using Azure.Mcp.Core.Extensions;
 using Azure.Mcp.Core.Models.Option;
@@ -92,7 +93,7 @@ public sealed class NamespaceGetCommand(ILogger<NamespaceGetCommand> logger)
                 if (string.IsNullOrEmpty(options.ResourceGroup))
                 {
                     // For backward compatibility, still require resource group for list operations
-                    context.Response.Status = 400;
+                    context.Response.Status = HttpStatusCode.BadRequest;
                     context.Response.Message = "Resource group is required when not specifying a specific namespace name.";
                     return context.Response;
                 }
@@ -117,12 +118,11 @@ public sealed class NamespaceGetCommand(ILogger<NamespaceGetCommand> logger)
         return context.Response;
     }
 
-    protected override int GetStatusCode(Exception ex) => ex switch
+    protected override HttpStatusCode GetStatusCode(Exception ex) => ex switch
     {
-        KeyNotFoundException => 404,
-        RequestFailedException reqEx => reqEx.Status,
-        Identity.AuthenticationFailedException => 401,
-        ArgumentException => 400,
+        KeyNotFoundException => HttpStatusCode.NotFound,
+        Identity.AuthenticationFailedException => HttpStatusCode.Unauthorized,
+        ArgumentException => HttpStatusCode.BadRequest,
         _ => base.GetStatusCode(ex)
     };
 

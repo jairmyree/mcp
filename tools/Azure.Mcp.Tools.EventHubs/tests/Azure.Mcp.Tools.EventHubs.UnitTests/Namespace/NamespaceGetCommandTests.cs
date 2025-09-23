@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using System.CommandLine.Parsing;
+using System.Net;
 using Azure.Mcp.Core.Models.Command;
 using Azure.Mcp.Core.Options;
-using Azure.Mcp.Tools.EventHubs.Commands;
 using Azure.Mcp.Tools.EventHubs.Commands.Namespace;
 using Azure.Mcp.Tools.EventHubs.Models;
 using Azure.Mcp.Tools.EventHubs.Services;
@@ -105,12 +104,12 @@ public class NamespaceGetCommandTests
         // Assert
         if (shouldSucceed)
         {
-            Assert.Equal(200, response.Status);
+            Assert.Equal(HttpStatusCode.OK, response.Status);
             Assert.NotNull(response.Results);
         }
         else
         {
-            Assert.NotEqual(200, response.Status);
+            Assert.NotEqual(HttpStatusCode.OK, response.Status);
             Assert.NotNull(response.Message);
         }
     }
@@ -132,7 +131,7 @@ public class NamespaceGetCommandTests
         var response = await _command.ExecuteAsync(_context, parseResult);
 
         // Assert
-        Assert.NotEqual(200, response.Status);
+        Assert.NotEqual(HttpStatusCode.OK, response.Status);
         Assert.NotNull(response.Message);
     }
 
@@ -152,7 +151,7 @@ public class NamespaceGetCommandTests
         var response = await _command.ExecuteAsync(_context, parseResult);
 
         // Assert
-        Assert.NotEqual(200, response.Status);
+        Assert.NotEqual(HttpStatusCode.OK, response.Status);
         Assert.NotNull(response.Message);
     }
 
@@ -168,7 +167,7 @@ public class NamespaceGetCommandTests
         var response = await _command.ExecuteAsync(_context, parseResult);
 
         // Assert
-        Assert.Equal(200, response.Status);
+        Assert.Equal(HttpStatusCode.OK, response.Status);
         Assert.Null(response.Results); // Should be null when no namespaces found
 
         await _eventHubsService.Received(1).GetNamespacesAsync("rg-empty", "12345678-1234-1234-1234-123456789012", Arg.Any<string?>(), Arg.Any<RetryPolicyOptions?>());
@@ -199,7 +198,7 @@ public class NamespaceGetCommandTests
         var response = await _command.ExecuteAsync(_context, parseResult);
 
         // Assert
-        Assert.Equal(200, response.Status);
+        Assert.Equal(HttpStatusCode.OK, response.Status);
         Assert.NotNull(response.Results);
 
         // Verify response structure
@@ -252,7 +251,7 @@ public class NamespaceGetCommandTests
         var response = await _command.ExecuteAsync(_context, parseResult);
 
         // Assert
-        Assert.Equal(200, response.Status);
+        Assert.Equal(HttpStatusCode.OK, response.Status);
         Assert.NotNull(response.Results);
 
         // Since we mocked the service to return the expected namespace,
