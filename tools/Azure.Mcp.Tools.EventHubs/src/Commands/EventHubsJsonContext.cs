@@ -2,11 +2,15 @@
 // Licensed under the MIT License.
 
 using System.Text.Json.Serialization;
+using Azure.Mcp.Tools.EventHubs.Commands.ConsumerGroup;
 using Azure.Mcp.Tools.EventHubs.Commands.Namespace;
 using Azure.Mcp.Tools.EventHubs.Models;
 
 namespace Azure.Mcp.Tools.EventHubs.Commands;
 
+[JsonSerializable(typeof(Models.ConsumerGroup))]
+[JsonSerializable(typeof(ConsumerGroupDeleteCommand.ConsumerGroupDeleteCommandResult))]
+[JsonSerializable(typeof(ConsumerGroupUpdateCommand.ConsumerGroupUpdateCommandResult))]
 [JsonSerializable(typeof(EventHubsNamespaceData))]
 [JsonSerializable(typeof(EventHubsNamespaceSku))]
 [JsonSerializable(typeof(Models.Namespace))]
