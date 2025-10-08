@@ -8,15 +8,15 @@ namespace Azure.Mcp.Tools.EventHubs.Options.ConsumerGroup;
 
 public class ConsumerGroupUpdateOptions : BaseEventHubsOptions
 {
-    [JsonPropertyName("eventHubName")]
+    [JsonPropertyName(EventHubsOptionDefinitions.EventHubName)]
     public string EventHubName { get; set; } = string.Empty;
 
-    [JsonPropertyName("namespaceName")]
+    [JsonPropertyName(EventHubsOptionDefinitions.Namespace)]
     public string NamespaceName { get; set; } = string.Empty;
 
-    [JsonPropertyName("consumerGroupName")]
+    [JsonPropertyName(EventHubsOptionDefinitions.ConsumerGroupName)]
     public string ConsumerGroupName { get; set; } = string.Empty;
 
-    [JsonPropertyName("userMetadata")]
+    [JsonPropertyName(EventHubsOptionDefinitions.UserMetadata)]
     public string? UserMetadata { get; set; }
 }

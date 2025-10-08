@@ -7,12 +7,12 @@ namespace Azure.Mcp.Tools.EventHubs.Options.ConsumerGroup;
 
 public class ConsumerGroupDeleteOptions : BaseEventHubsOptions
 {
-    [JsonPropertyName(EventHubsOptionDefinitions.EventHubNameName)]
+    [JsonPropertyName(EventHubsOptionDefinitions.EventHubName)]
     public string EventHubName { get; set; } = string.Empty;
 
-    [JsonPropertyName(EventHubsOptionDefinitions.NamespaceName)]
+    [JsonPropertyName(EventHubsOptionDefinitions.Namespace)]
     public string NamespaceName { get; set; } = string.Empty;
 
-    [JsonPropertyName(EventHubsOptionDefinitions.ConsumerGroupNameName)]
+    [JsonPropertyName(EventHubsOptionDefinitions.ConsumerGroupName)]
     public string ConsumerGroupName { get; set; } = string.Empty;
 }
